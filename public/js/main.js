@@ -15,7 +15,7 @@ $(document).ready(function () {
                     displayContent(data);
                     $('#covid19APIReport_display').DataTable(
                         {
-                            "order": [[ 1, "desc" ]]
+                            "order": [[ 2, "desc" ]], "ordering": false
                         }
                     );
                 } else {
@@ -37,8 +37,10 @@ function displayContent(data)
     <thead>
         <tr>
             <th>Date</th>
-            <th>Confirmed</th>
-            <th>Deaths</th>
+            <th>New Cases</th>
+            <th>Total Confirmed</th>
+             <th>New Deaths</th>
+            <th>Total Deaths</th>
             <th>Recovered</th>
             <th>Active</th>
         </tr>
@@ -49,7 +51,9 @@ function displayContent(data)
         output += `
         <tr>
             <td>${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</td>
+            <td>`+(parseInt(data[i].Confirmed) - parseInt(data[i-1].Confirmed)).toLocaleString()+`</td>
             <td>`+parseInt(data[i].Confirmed).toLocaleString()+`</td>
+            <td>`+(parseInt(data[i].Deaths) - parseInt(data[i-1].Deaths)).toLocaleString()+`</td>
             <td>`+parseInt(data[i].Deaths).toLocaleString()+`</td>
             <td>`+parseInt(data[i].Recovered).toLocaleString()+`</td>
             <td>`+parseInt(data[i].Active).toLocaleString()+`</td>
